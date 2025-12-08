@@ -1,0 +1,1 @@
+import{_ as s,c as t,a,o as c}from"./index-bgLIQOvD.js";const o={},r={class:"page"};function _(n,e){return c(),t("section",r,[...e[0]||(e[0]=[a("p",{class:"page__title"},"Страница: Scheduler",-1)])])}const l=s(o,[["render",_],["__scopeId","data-v-5f17043f"]]);export{l as default};
