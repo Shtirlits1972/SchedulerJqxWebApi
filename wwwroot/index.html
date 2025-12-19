@@ -5,8 +5,22 @@
     <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vite App</title>
-    <script type="module" crossorigin src="/assets/index-bgLIQOvD.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DvIe33lu.css">
+    <!-- Load jqwidgets globally to avoid bundling/minification issues -->
+    <script src="/jqx-all.js"></script>
+    <!--
+      Globalize нужен ДО подключения culture-файла, иначе будет ошибка:
+      "Cannot read properties of undefined (reading 'addCultureInfo')".
+
+      Культура ru-RU для Globalize (jqxWidgets).
+      Нужна для корректной русификации календарей (jqxDateTimeInput/jqxCalendar) и 24-часового времени.
+      Источники (копии лежат в /public):
+      - node_modules/jqwidgets-scripts/jqwidgets/globalization/globalize.js
+      - node_modules/jqwidgets-scripts/jqwidgets/globalization/globalize.culture.ru-RU.js
+    -->
+    <script src="/globalize.js"></script>
+    <script src="/globalize.culture.ru-RU.js"></script>
+    <script type="module" crossorigin src="/assets/index-Boo3TOTd.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CPyG5z7F.css">
   </head>
   <body>
     <div id="app"></div>

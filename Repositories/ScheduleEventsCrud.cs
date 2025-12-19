@@ -27,7 +27,7 @@ namespace SchedulerJqxWebApi.Repositories
                 using (IDbConnection db = new SqlConnection(strConn))
                 {
                     list = db.Query<ScheduleEvents>(
-                        "SELECT Id, masterID, MasterName, locationID, NameLocation, start_event, DurationTime FROM ScheduleEventsView   WHERE start_event BETWEEN @startDate AND @endDate", new { startDate, endDate}
+                        "SELECT Id, masterID, MasterName, locationID, NameLocation, start_event, finish_event, subject, description, status  FROM ScheduleEventsView   WHERE start_event BETWEEN @startDate AND @endDate", new { startDate, endDate}
                     ).ToList();
                 }
             }
@@ -46,7 +46,7 @@ namespace SchedulerJqxWebApi.Repositories
             using (IDbConnection db = new SqlConnection(strConn))
             {
                 model = db.Query<ScheduleEvents>(
-                    "SELECT Id, masterID, MasterName, locationID, NameLocation, start_event, DurationTime FROM ScheduleEventsView WHERE Id = @Id;",
+                    "SELECT Id, masterID, MasterName, locationID, NameLocation, start_event, finish_event, subject, description, status  FROM ScheduleEventsView WHERE Id = @Id;",
                     new { Id }
                 ).FirstOrDefault();
             }
@@ -71,9 +71,13 @@ namespace SchedulerJqxWebApi.Repositories
                     SET masterID = @masterID,
                         locationID = @locationID,
                         start_event = @start_event,
-                        DurationTime = @DurationTime
-                    WHERE Id = @Id;";
-                db.Execute(Query, model);
+                        finish_event = @finish_event,
+                        [subject] = @subject,
+                        description = @description,
+                        status = @status
+
+                        WHERE Id = @Id;";
+                    db.Execute(Query, model);
             }
         }
 
@@ -82,8 +86,8 @@ namespace SchedulerJqxWebApi.Repositories
             using (IDbConnection db = new SqlConnection(strConn))
             {
                 var Query = @"
-                    INSERT INTO ScheduleEvents (masterID, locationID, start_event, DurationTime)
-                    VALUES (@masterID, @locationID, @start_event, @DurationTime);
+                    INSERT INTO ScheduleEvents (masterID, locationID, start_event, finish_event, subject, description, status   )
+                    VALUES (@masterID, @locationID, @start_event, @finish_event, @subject, @description, @status);
                     SELECT CAST(SCOPE_IDENTITY() as int)";
                 int Id = db.Query<int>(Query, model).FirstOrDefault();
                 model.Id = Id;

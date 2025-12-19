@@ -19,11 +19,24 @@ namespace SchedulerJqxWebApi.Models
 
         public DateTime start_event { get; set; }
 
-        public TimeSpan DurationTime { get; set; }
+        public DateTime finish_event { get; set; }
+
+        [StringLength(250)]
+        public string subject { get; set; } = string.Empty;
+
+        [StringLength(250)]
+        public string description { get; set; } = string.Empty;
+
+        [StringLength(250)]
+        public string status { get; set; } = string.Empty;
+
 
         public override string ToString()
         {
-            return $"ScheduleEvents(Id = {Id}, MasterId = {MasterId}, MasterName = \"{MasterName}\", LocationId = {LocationId}, NameLocation = \"{NameLocation}\", StartEvent = {start_event:O}, DurationTime = {DurationTime})";
+            return $"ScheduleEvents(Id = {Id}, MasterId = {MasterId}, MasterName = \"{MasterName}\", LocationId = {LocationId}, NameLocation = \"{NameLocation}\"," +
+            $" StartEvent = {start_event:O}, finish_event = {finish_event}, subject = {subject}, description = {description}, status = {status} )";
         }
     }
 }
+
+
