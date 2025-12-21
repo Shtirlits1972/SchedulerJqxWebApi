@@ -10,9 +10,12 @@ namespace SchedulerJqxWebApi.Models
         [StringLength(250)]
         public string NameLocation { get; set; } = string.Empty;
 
+        [StringLength(50)]
+        public string Color { get; set; } = "#0078D4";
+
         public override string ToString()
         {
-            return $"Location(Id = {Id}, NameLocation = {NameLocation})";
+            return $"Location(Id = {Id}, NameLocation = {NameLocation}, Color = {Color})";
         }
     }
 }

@@ -27,7 +27,7 @@ namespace SchedulerJqxWebApi.Repositories
                 using (IDbConnection db = new SqlConnection(strConn))
                 {
                     list = db.Query<ScheduleEvents>(
-                        "SELECT Id, masterID, MasterName, locationID, NameLocation, start_event, finish_event, subject, description, status  FROM ScheduleEventsView   WHERE start_event BETWEEN @startDate AND @endDate", new { startDate, endDate}
+                        "SELECT Id, masterID, MasterName, locationID, NameLocation, start_event, finish_event, subject, description, status, Color  FROM ScheduleEventsView   WHERE start_event BETWEEN @startDate AND @endDate", new { startDate, endDate}
                     ).ToList();
                 }
             }
@@ -46,7 +46,7 @@ namespace SchedulerJqxWebApi.Repositories
             using (IDbConnection db = new SqlConnection(strConn))
             {
                 model = db.Query<ScheduleEvents>(
-                    "SELECT Id, masterID, MasterName, locationID, NameLocation, start_event, finish_event, subject, description, status  FROM ScheduleEventsView WHERE Id = @Id;",
+                    "SELECT Id, masterID, MasterName, locationID, NameLocation, start_event, finish_event, subject, description, status, Color  FROM ScheduleEventsView WHERE Id = @Id;",
                     new { Id }
                 ).FirstOrDefault();
             }

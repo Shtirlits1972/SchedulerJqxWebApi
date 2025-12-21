@@ -14,7 +14,7 @@ namespace SchedulerJqxWebApi.Crud
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                list = db.Query<Location>("SELECT Id, NameLocation FROM Location").ToList();
+                list = db.Query<Location>("SELECT Id, NameLocation, [Color] FROM Location").ToList();
             }
 
             return list;
@@ -26,7 +26,7 @@ namespace SchedulerJqxWebApi.Crud
 
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                model = db.Query<Location>("SELECT Id, NameLocation FROM Location WHERE Id = @Id;", new { Id }).FirstOrDefault();
+                model = db.Query<Location>("SELECT Id, NameLocation, [Color] FROM Location WHERE Id = @Id;", new { Id }).FirstOrDefault();
             }
 
             return model;
@@ -44,7 +44,7 @@ namespace SchedulerJqxWebApi.Crud
         {
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                var Query = "UPDATE Location SET NameLocation = @NameLocation WHERE Id = @Id;";
+                var Query = "UPDATE Location SET NameLocation = @NameLocation, Color = @Color WHERE Id = @Id;";
                 db.Execute(Query, model);
             }
         }
@@ -53,7 +53,7 @@ namespace SchedulerJqxWebApi.Crud
         {
             using (IDbConnection db = new SqlConnection(strConn))
             {
-                var Query = "INSERT INTO Location (NameLocation) VALUES(@NameLocation); SELECT CAST(SCOPE_IDENTITY() as int)";
+                var Query = "INSERT INTO Location (NameLocation, Color) VALUES(@NameLocation, @Color); SELECT CAST(SCOPE_IDENTITY() as int)";
                 int Id = db.Query<int>(Query, model).FirstOrDefault();
                 model.Id = Id;
             }
