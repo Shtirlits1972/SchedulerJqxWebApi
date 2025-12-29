@@ -24,7 +24,7 @@ namespace SchedulerJqxWebApi.Controllers
 
         // GET: api/Users
         [HttpGet]
-        [Authorize(Roles = "admin")] // Пример ограничения доступа
+        [Authorize] 
         public async Task<ActionResult<IEnumerable<Users>>> Get()
         {
             try
@@ -78,7 +78,7 @@ namespace SchedulerJqxWebApi.Controllers
 
         // POST api/Users
         [HttpPost]
-        [Authorize(Roles = "admin")] // Пример ограничения доступа
+        [Authorize] 
         public async Task<ActionResult<UserInfo>> Post([FromBody] CreateUserRequest request)
         {
             try
@@ -187,7 +187,7 @@ namespace SchedulerJqxWebApi.Controllers
 
         // DELETE api/Users/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")] // Пример ограничения доступа
+        [Authorize] 
         public async Task<ActionResult> Delete(int id)
         {
             try

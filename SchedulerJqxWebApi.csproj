@@ -19,4 +19,10 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+<Target Name="BuildFrontend" BeforeTargets="Build">
+  <Exec WorkingDirectory="..\schedulerprimevuequasarfront" Command="npm install" />
+  <Exec WorkingDirectory="..\schedulerprimevuequasarfront" Command="npm run build" />
+</Target>
+
+
 </Project>
